@@ -4,6 +4,7 @@ const User = require("../models/User");
 
 module.exports = {
     create(req, res) {
+        console.log(req.body);
         let { amount, note, type } = req.body
         let userId = req.user._id;
 
@@ -30,12 +31,12 @@ module.exports = {
                 User.findByIdAndUpdate(updatedUser._id, { $set: updatedUser }, { new: true })
                     .then(result => {
                         res.status(201).json({
-                                message: 'Transaction created successfully',
-                                ...trans._doc,
-                                user: result
-                            })
-                            .catch(err => serverError(res, err));
+                            message: 'Transaction created successfully',
+                            ...trans._doc,
+                            user: result
+                        })
                     })
+                    .catch(err => serverError(res, err));
             })
             .catch(error => serverError(res, error));
     },

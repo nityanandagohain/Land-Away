@@ -17,3 +17,13 @@ export const loadTransactions = () => dispatch => {
             console.log(err)
         })
 }
+
+export const addNewTransaction = (transaction) => dispatch => {
+    axiosApi.post('/api/transactions', transaction)
+        .then(response => {
+            dispatch({ type: Types.CREATE_TRANSACTION, payload: { transaction: response.data } })
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
