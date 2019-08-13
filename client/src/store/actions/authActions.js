@@ -55,3 +55,14 @@ export const login = (user, history) => dispatch => {
             })
         })
 }
+
+export const logout = history => dispatch => {
+    localStorage.removeItem('auth_token');
+    history.push('/login');
+    dispatch({
+        type: Types.SET_USER,
+        payload: {
+            user: {}
+        }
+    })
+}

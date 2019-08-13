@@ -60,7 +60,7 @@ class Login extends Component {
                             <input 
                                 type="text"
                                 className={error.password ? "form-control is-invalid" : "form-control"}
-                                placeholder="Enter Your Name"
+                                placeholder="Enter Your password"
                                 name="password"
                                 id="password"
                                 value={password}
@@ -79,6 +79,7 @@ class Login extends Component {
     }
 }
 
+// Makes the functions of authActions accessible via props
 const mapStateToProps = state => ({
     auth: state.auth
 });

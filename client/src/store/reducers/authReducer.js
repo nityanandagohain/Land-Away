@@ -12,7 +12,7 @@ const authReducer = (state = init, action) => {
             {
                 return {
                     user: action.payload.user,
-                    isAuthenticated: Object.keys(action.payload.user).length === 0,
+                    isAuthenticated: Object.keys(action.payload.user).length !== 0,
                     error: {}
                 }
             }
