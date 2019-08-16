@@ -27,3 +27,24 @@ export const addNewTransaction = (transaction) => dispatch => {
             console.log(err);
         })
 }
+
+export const removeTransaction = id => dispatch => {
+    axiosApi.delete(`/api/transactions/${id}`)
+        .then(response => {
+            dispatch({ type: Types.REMOVE_TRANSACTION, payload: { id: response.data._id } });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+}
+
+export const updateTransaction = (id, transaction) => dispatch => {
+    axiosApi.put(`api/transactions/${id.trim()}`, transaction)
+        .then(result => {
+            console.log("trans", result);
+            dispatch({ type: Types.UPDATE_TRANSACTION, payload: { transaction: result.data.transaction } })
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}

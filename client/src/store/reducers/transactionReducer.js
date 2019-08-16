@@ -14,6 +14,23 @@ const transactionReducer = (state = init, action) => {
                 transactions.unshift(action.payload.transaction);
                 return transactions
             }
+        case Types.REMOVE_TRANSACTION:
+            {
+                let transactions = [...state];
+                return transactions.filter(trans => {
+                    return trans._id !== action.payload.id
+                })
+            }
+        case Types.UPDATE_TRANSACTION:
+            {
+                let transactions = [...state];
+                return transactions.map(trans => {
+                    if (trans._id == action.payload.transaction.id) {
+                        return action.payload.transacation
+                    }
+                    return trans;
+                })
+            }
         default:
             return state;
     }
