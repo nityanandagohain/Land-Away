@@ -16,7 +16,7 @@ app.use(passport.initialize());
 require('./passport')(passport);
 
 app.use('/api/users/', require("./routers/userRoute"));
-app.use('/api/transactions/', require("./routers/TransactionRoute"));
+app.use('/api/properties/', require("./routers/PropertyRoute"));
 
 app.get('/', (req, res) => {
     res.json({

@@ -17,7 +17,7 @@ module.exports = {
             return res.status(400).json(validate.error);
         }
 
-        // check if the user exists
+        // check if the email exists
         User.findOne({ email })
             // Use populate for transaction
             .then(user => {
@@ -40,11 +40,9 @@ module.exports = {
                         _id: user._id,
                         name: user.name,
                         email: user.email,
-                        amount: user.amount,
-                        income: user.income,
-                        expense: user.expense,
-                        transactions: user.transactions
-                    }, 'SECRET', { expiresIn: '2h' });
+                        property_owned: user.property_owned,
+                        property_interacted: user.property_interacted
+                    }, 'SECRET', { expiresIn: '10h' });
 
                     res.status(200).json({
                         message: 'Login Successful',
@@ -81,10 +79,8 @@ module.exports = {
                         name,
                         email,
                         password: hash,
-                        balance: 0,
-                        expense: 0,
-                        income: 0,
-                        transactions: []
+                        property_owned: [],
+                        property_interacted: []
                     });
 
                     // Save to database

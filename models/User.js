@@ -15,13 +15,18 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    balance: Number,
-    income: Number,
-    expense: Number,
-    transactions: {
+    property_owned: {
         type: [{
             type: Schema.Types.ObjectId,
-            ref: 'Transaction'
+            ref: 'Property'
+        }]
+    },
+
+    // For later part
+    property_interacted: {
+        type: [{
+            type: Schema.Types.ObjectId,
+            ref: 'Property'
         }]
     }
 });

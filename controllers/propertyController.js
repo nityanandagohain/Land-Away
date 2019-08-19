@@ -1,38 +1,42 @@
-const Transaction = require("../models/Transaction");
+const Property = require("../models/Property");
 const { serverError } = require("../utils/error")
 const User = require("../models/User");
 
 module.exports = {
     create(req, res) {
         console.log(req.body);
-        let { amount, note, type } = req.body
+        let { property_name, contact_email, contact_phone, price, description, tags } = req.body
         let userId = req.user._id;
 
-        let transaaction = new Transaction({
-            amount,
-            note,
-            type,
+        let property = new Property({
+            property_name,
+            contact_email,
+            contact_phone,
+            price,
+            description,
+            tags,
             author: userId
         });
 
-        transaaction.save()
-            .then(trans => {
+        property.save()
+            .then(property => {
                 let updatedUser = {...req.user._doc };
-                if (type === 'income') {
-                    updatedUser.balance = updatedUser.balance + amount;
-                    updatedUser.income = updatedUser.income + amount;
-                } else if (type == 'expense') {
-                    updatedUser.balance = updatedUser.balance - amount;
-                    updatedUser.expense = updatedUser.expense + amount;
-                }
+                // if (type === 'income') {
+                //     updatedUser.balance = updatedUser.balance + amount;
+                //     updatedUser.income = updatedUser.income + amount;
+                // } else if (type == 'expense') {
+                //     updatedUser.balance = updatedUser.balance - amount;
+                //     updatedUser.expense = updatedUser.expense + amount;
+                // }
+
                 //insert in the beginning
                 console.log(updatedUser);
-                updatedUser.transactions.unshift(trans._id);
+                updatedUser.property_owned.unshift(property._id);
                 User.findByIdAndUpdate(updatedUser._id, { $set: updatedUser }, { new: true })
                     .then(result => {
                         res.status(201).json({
                             message: 'Transaction created successfully',
-                            ...trans._doc,
+                            ...property._doc,
                             user: result
                         })
                     })
@@ -43,7 +47,7 @@ module.exports = {
     getAll(req, res) {
         let { _id } = req.user._doc
         console.log("in get all")
-        Transaction.find({ author: _id })
+        Property.find({ author: _id })
             .then(trans => {
                 if (trans.length == 0) {
                     res.status(200).json({
