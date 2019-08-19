@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { loadTransactions, removeTransaction } from "../store/actions/transactionActions";
-import CreateTransaction from '../components/transactions/createTransaction';
-import UpdateTransaction from '../components/transactions/UpdateTransaction';
+import { loadProperties, removeTransaction } from "../store/actions/propertyActions";
+import CreateTransaction from '../components/transactions/createProperty';
+import UpdateTransaction from '../components/transactions/UpdateProperty';
 
 class Dashboard extends Component {
 
@@ -40,7 +40,7 @@ class Dashboard extends Component {
     }
 
     componentDidMount() {
-        this.props.loadTransactions();
+        this.props.loadProperties();
     }
 
     render() {
@@ -98,7 +98,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    transactions: state.transactions
+    transactions: state.properties
 });
 
-export default connect(mapStateToProps, { loadTransactions, removeTransaction})(Dashboard);
+export default connect(mapStateToProps, { loadProperties, removeTransaction})(Dashboard);

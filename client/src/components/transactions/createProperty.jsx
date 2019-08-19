@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
 import {connect} from 'react-redux';
-import {addNewTransaction} from '../../store/actions/transactionActions';
+import {addNewTransaction} from '../../store/actions/propertyActions';
 
 const customStyles = {
     content : {
