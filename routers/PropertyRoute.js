@@ -2,7 +2,8 @@ const router = require("express").Router();
 const { getAll, create, update, getSingleTransaction, remove } = require("../controllers/propertyController");
 const authenticate = require("../authenticate");
 
-router.get('/', authenticate, getAll);
+// Everyone can see the properties available
+router.get('/', getAll);
 
 router.post('/', authenticate, create);
 

@@ -5,9 +5,8 @@ const User = require("../models/User");
 module.exports = {
     create(req, res) {
         console.log(req.body);
-        let { property_name, contact_email, contact_phone, price, description, tags } = req.body
+        let { property_name, contact_email, contact_phone, price, description, tags, address } = req.body
         let userId = req.user._id;
-
         let property = new Property({
             property_name,
             contact_email,
@@ -15,19 +14,13 @@ module.exports = {
             price,
             description,
             tags,
+            address,
             author: userId
         });
 
         property.save()
             .then(property => {
                 let updatedUser = {...req.user._doc };
-                // if (type === 'income') {
-                //     updatedUser.balance = updatedUser.balance + amount;
-                //     updatedUser.income = updatedUser.income + amount;
-                // } else if (type == 'expense') {
-                //     updatedUser.balance = updatedUser.balance - amount;
-                //     updatedUser.expense = updatedUser.expense + amount;
-                // }
 
                 //insert in the beginning
                 console.log(updatedUser);
@@ -45,9 +38,9 @@ module.exports = {
             .catch(error => serverError(res, error));
     },
     getAll(req, res) {
-        let { _id } = req.user._doc
+        // let { _id } = req.user._doc
         console.log("in get all")
-        Property.find({ author: _id })
+        Property.find()
             .then(trans => {
                 if (trans.length == 0) {
                     res.status(200).json({
@@ -60,8 +53,8 @@ module.exports = {
             .catch(err => serverError(res, err));
     },
     getSingleTransaction(req, res) {
-        let { transactionId } = req.params;
-        Transaction.finddById(transactionId)
+        let { propertyID } = req.params;
+        Property.finddById(propertyID)
             .then(trans => {
                 if (!trans) {
                     res.status(200).json({
@@ -73,8 +66,8 @@ module.exports = {
             .catch(err => serverError(res, err));
     },
     update(req, res) {
-        let { transactionId } = req.params;
-        Transaction.findOneAndUpdate({ _id: transactionId }, { $set: req.body }, { new: true })
+        let { propertyID } = req.params;
+        Property.findOneAndUpdate({ _id: propertyID }, { $set: req.body }, { new: true })
             .then(result => {
                 res.status(200).json({
                     message: 'Updated Successfully',
@@ -84,9 +77,9 @@ module.exports = {
             .catch(err => serverError(res, err));
     },
     remove(req, res) {
-        let { transactionId } = req.params;
-        console.log(transactionId)
-        Transaction.findOneAndDelete({ _id: transactionId })
+        let { propertyID } = req.params;
+        console.log(propertyID)
+        Property.findOneAndDelete({ _id: propertyID })
             .then(result => {
                 res.status(200).json({
                     message: "Deleted Successfully",

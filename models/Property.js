@@ -33,6 +33,13 @@ const PropertySchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
+    address: {
+        country: String,
+        state: String,
+        district: String,
+        locality: String,
+        pincode: Number,
+    }
     // please check images its empty for now
     // images: {
     //     type: [{
