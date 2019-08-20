@@ -16,9 +16,18 @@ const customStyles = {
 
 class CreateTransaction extends Component {
     state = {
-        amount: 0,
-        type: '',
-        note: ''
+        property_name : "",
+        contact_email : "",
+        contact_phone : "",
+        price : 0,
+        description: "",
+        tags: [],
+        address: {
+            state: "",
+            country: "",
+            locality: "",
+            pin: 0
+        }
     }
 
     changeHandler = event => {
@@ -39,7 +48,7 @@ class CreateTransaction extends Component {
     }
 
     render() {
-        let {amount, type, note} = this.state;
+        let {property_name, contact_email, contact_phone, price, type, note} = this.state;
         return (
             <Modal
                 isOpen={this.props.isOpen}
@@ -50,19 +59,55 @@ class CreateTransaction extends Component {
                 <h2>Create A New Transaction</h2>
                 <form onSubmit={this.submitHandler}>
                     <div className="form-group">
-                        <label htmlFor={amount}>Amount :</label>
+                        <label htmlFor={property_name}>Property Name :</label>
                         <input
                             // className={error.email ? "form-control is-invalid" : "form-control"}
                             className="form-control"
                             placeholder="Enter Amount"
-                            name="amount"
-                            id="amount"
-                            value={amount}
+                            name="property_name"
+                            id="property_name"
+                            value={property_name}
                             onChange={this.changeHandler}
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor={type}>Type :</label>
+                        <label htmlFor={contact_email}>Contact Email :</label>
+                        <input
+                            // className={error.email ? "form-control is-invalid" : "form-control"}
+                            className="form-control"
+                            placeholder="Enter Amount"
+                            name="contact_email"
+                            id="contact_email"
+                            value={contact_email}
+                            onChange={this.changeHandler}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor={contact_phone}>Contact Phone :</label>
+                        <input
+                            // className={error.email ? "form-control is-invalid" : "form-control"}
+                            className="form-control"
+                            placeholder="Enter Amount"
+                            name="contact_phone"
+                            id="contact_phone"
+                            value={contact_phone}
+                            onChange={this.changeHandler}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor={price}>Contact Phone :</label>
+                        <input
+                            // className={error.email ? "form-control is-invalid" : "form-control"}
+                            className="form-control"
+                            placeholder="Enter Amount"
+                            name="price"
+                            id="price"
+                            value={price}
+                            onChange={this.changeHandler}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor={contact_email}>Type :</label>
                         <select
                             className="form-control"
                             onChange={this.changeHandler}

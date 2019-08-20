@@ -21,14 +21,6 @@ class Home extends Component {
                         >
                             <p>{property.property_name}</p>
                             <p>Amount: {property.price}</p>
-                            <button
-                                className="btn btn-danger"
-                                onClick={() => this.props.removeTransaction(property._id)}
-                            >Remove</button>
-                            <button
-                                className="btn btn-success"
-                                onClick={() => this.onUpdateModal(property._id)}
-                            >Update</button>
                         </li>
                     )) : <p>hello</p>
                 }
