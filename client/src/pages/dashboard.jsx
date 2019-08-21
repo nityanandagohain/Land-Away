@@ -53,7 +53,7 @@ class Dashboard extends Component {
                     <button
                         className="btn btn-primary"
                         onClick={this.onCreateModal}
-                    >Create New Transaction</button>
+                    >New Property</button>
                     <CreateTransaction
                         isOpen={this.state.createModalOpen}
                         close={this.closeCreateModal}

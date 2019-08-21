@@ -39,16 +39,16 @@ class CreateTransaction extends Component {
     submitHandler = event => {
         event.preventDefault();
         console.log(this.state);
-        this.props.addNewTransaction(this.state);
-        this.setState({
-            amount: 0,
-            type: '',
-            note: ''
-        })
+        // this.props.addNewTransaction(this.state);
+        // this.setState({
+        //     amount: 0,
+        //     type: '',
+        //     note: ''
+        // })
     }
 
     render() {
-        let {property_name, contact_email, contact_phone, price, type, note} = this.state;
+        let {property_name, contact_email, contact_phone, description, address, price} = this.state;
         return (
             <Modal
                 isOpen={this.props.isOpen}
@@ -56,7 +56,7 @@ class CreateTransaction extends Component {
                 style={customStyles}
                 ariaHideApp={false}
             >
-                <h2>Create A New Transaction</h2>
+                <h2>Add a new property</h2>
                 <form onSubmit={this.submitHandler}>
                     <div className="form-group">
                         <label htmlFor={property_name}>Property Name :</label>
@@ -95,7 +95,7 @@ class CreateTransaction extends Component {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor={price}>Contact Phone :</label>
+                        <label htmlFor={price}>Price :</label>
                         <input
                             // className={error.email ? "form-control is-invalid" : "form-control"}
                             className="form-control"
@@ -107,25 +107,73 @@ class CreateTransaction extends Component {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor={contact_email}>Type :</label>
-                        <select
+                        <label htmlFor={price}>Price :</label>
+                        <input
+                            // className={error.email ? "form-control is-invalid" : "form-control"}
                             className="form-control"
+                            placeholder="Enter Amount"
+                            name="price"
+                            id="price"
+                            value={price}
                             onChange={this.changeHandler}
-                            name="type"
-                        >
-                            <option> Select A Type</option>
-                            <option value="expense"></option>
-                            <option value="income"></option>
-                        </select>
+                        />
                     </div>
                     <div className="form-group">
-                        <label htmlFor={note}>Note :</label>
+                        <label htmlFor={address.locality}>Locality :</label>
+                        <input
+                            // className={error.email ? "form-control is-invalid" : "form-control"}
+                            className="form-control"
+                            placeholder="Enter Amount"
+                            name="locality"
+                            id="locality"
+                            value={address.locality}
+                            onChange={this.changeHandler}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor={address.pin}>pin :</label>
+                        <input
+                            // className={error.email ? "form-control is-invalid" : "form-control"}
+                            className="form-control"
+                            placeholder="Enter Amount"
+                            name="pin"
+                            id="pin"
+                            value={address.pin}
+                            onChange={this.changeHandler}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor={address.state}>State :</label>
+                        <input
+                            // className={error.email ? "form-control is-invalid" : "form-control"}
+                            className="form-control"
+                            placeholder="Enter Amount"
+                            name="state"
+                            id="state"
+                            value={address.state}
+                            onChange={this.changeHandler}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor={address.country}>Country :</label>
+                        <input
+                            // className={error.email ? "form-control is-invalid" : "form-control"}
+                            className="form-control"
+                            placeholder="Enter Amount"
+                            name="country"
+                            id="country"
+                            value={address.country}
+                            onChange={this.changeHandler}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor={description}>description :</label>
                         <textarea
                             className="form-control"
                             placeholder="Enter a Note"
-                            name="note"
-                            id="note"
-                            value={note}
+                            name="description"
+                            id="description"
+                            value={description}
                             onChange={this.changeHandler}
                         />
                     </div>
