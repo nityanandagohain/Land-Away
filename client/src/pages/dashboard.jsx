@@ -20,7 +20,7 @@ class Dashboard extends Component {
 
     closeCreateModal = () => {
         this.setState({
-            updateTransactionModalOpen: false
+            createModalOpen: false
         })
     }
 

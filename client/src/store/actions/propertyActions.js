@@ -18,10 +18,10 @@ export const loadProperties = () => dispatch => {
         })
 }
 
-export const addNewTransaction = (transaction) => dispatch => {
-    axiosApi.post('/api/transactions', transaction)
+export const addNewProperty = (property) => dispatch => {
+    axiosApi.post('/api/properties', property)
         .then(response => {
-            dispatch({ type: Types.CREATE_PROPERTY, payload: { transaction: response.data } })
+            dispatch({ type: Types.CREATE_PROPERTY, payload: { property: response.data } })
         })
         .catch(err => {
             console.log(err);
