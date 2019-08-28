@@ -44,7 +44,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        let { auth, transactions } = this.props;
+        let { auth, properties } = this.props;
         return (
             <div className="row">
                 <div className="col-md-8 offset-md-2">
@@ -62,29 +62,29 @@ class Dashboard extends Component {
 
                     <h1>Transactions</h1>
                     <ul className="list-group">
-                        {transactions.length > 0 ?
-                            transactions.map(transaction => (
+                        {properties.length > 0 ?
+                            properties.map(property => (
                                 <li
-                                    key={transaction._id}
+                                    key={property._id}
                                     className="list-group-item"
                                 >
-                                    <p>Type: {transaction.type}</p>
-                                    <p>Amount: {transaction.amount}</p>
+                                    <p>Type: {property.type}</p>
+                                    <p>Amount: {property.amount}</p>
                                     {
-                                        this.state.id === transaction._id ?
+                                        this.state.id === property._id ?
                                             <UpdateTransaction
                                                 isOpen={this.state.updateTransactionModalOpen}
                                                 close={this.closeUpdateModal}
-                                                transaction = {transaction}
+                                                transaction = {property}
                                             /> : null
                                     }
                                     <button
                                         className="btn btn-danger"
-                                        onClick={() => this.props.removeTransaction(transaction._id)}
+                                        onClick={() => this.props.removeTransaction(property._id)}
                                     >Remove</button>
                                     <button
                                         className="btn btn-success"
-                                        onClick={() => this.onUpdateModal(transaction._id)}
+                                        onClick={() => this.onUpdateModal(property._id)}
                                     >Update</button>
                                 </li>
                             )) : <p>hello</p>
@@ -98,7 +98,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => ({
     auth: state.auth,
-    transactions: state.properties
+    properties: state.properties
 });
 
 export default connect(mapStateToProps, { loadProperties, removeTransaction})(Dashboard);

@@ -26,7 +26,8 @@ const initialState = {
     state: "",
     country: "",
     locality: "",
-    pincode: 0
+    pincode: 0,
+    error: {}
 }
 
 class CreateTransaction extends Component {

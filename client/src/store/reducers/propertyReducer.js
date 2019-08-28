@@ -1,6 +1,9 @@
 import * as Types from '../actions/types';
 
-const init = []
+const init = {
+    data: [],
+    error: {},
+}
 
 const propertyReducer = (state = init, action) => {
     switch (action.type) {
@@ -10,20 +13,20 @@ const propertyReducer = (state = init, action) => {
             }
         case Types.CREATE_PROPERTY:
             {
-                let properties = [...state]
+                let properties = [...state.data]
                 properties.unshift(action.payload.property);
                 return properties
             }
         case Types.REMOVE_PROPERTY:
             {
-                let properties = [...state];
+                let properties = [...state.data];
                 return properties.filter(trans => {
                     return trans._id !== action.payload.id
                 })
             }
         case Types.UPDATE_PROPERTY:
             {
-                let properties = [...state];
+                let properties = [...state.data];
                 return properties.map(property => {
                     if (property._id == action.payload.property.id) {
                         return action.payload.property
