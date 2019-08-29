@@ -27,7 +27,8 @@ const initialState = {
     country: "",
     locality: "",
     pincode: 0,
-    error: {}
+    error: {},
+    image: null
 }
 
 class CreateTransaction extends Component {
@@ -41,7 +42,6 @@ class CreateTransaction extends Component {
 
     submitHandler = event => {
         event.preventDefault();
-        this.props.close();
         let data = {
             property_name: this.state.property_name,
             contact_email: this.state.contact_email,
@@ -54,9 +54,9 @@ class CreateTransaction extends Component {
                 country: this.state.country,
                 locality: this.state.locality,
                 pincode: this.state.pincode
-            }
+            },
+            image: this.state.image
         }
-
         console.log(data);
 
 
@@ -64,6 +64,11 @@ class CreateTransaction extends Component {
         this.setState(initialState);
         alert("New Property Added");
         this.props.close();
+    }
+
+    // set the image state value
+    imageChangeHandler = event => {
+        this.setState({ image: event.target.files[0] });
     }
 
     render() {
@@ -77,6 +82,10 @@ class CreateTransaction extends Component {
             >
                 <h2>Add a new property</h2>
                 <form onSubmit={this.submitHandler}>
+                    <div className="form-group">
+                        <h5>Add Images</h5>
+                        <input type="file" name="image" onChange={this.imageChangeHandler} />
+                    </div>
                     <div className="form-group">
                         <label htmlFor={property_name}>Property Name :</label>
                         <input
